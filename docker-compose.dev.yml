@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: gym_frontend_dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://api:8000/api
+    volumes:
+      # Mount source code for hot-reload
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./messages:/app/messages
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - gym-dorian_default
+    restart: unless-stopped
+
+networks:
+  gym-dorian_default:
+    external: true

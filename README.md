@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gym Dorian - Frontend
+
+Next.js application for workout tracking and planning, built with React 19, TypeScript, and Tailwind CSS.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 20+ 
+- Backend API running (see [gym-dorian](../gym-dorian))
+- Docker and Docker Compose (for containerized development)
+
+### Local Development (without Docker)
+
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create `.env.local` file:
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000)
+
+### Docker Development (with hot-reload)
+
+**Prerequisites:** Backend must be running first to create the shared Docker network.
+
+1. Start the backend services:
+```bash
+cd ../gym-dorian
+docker-compose up -d
+```
+
+2. Verify the network exists:
+```bash
+docker network ls | grep gym-dorian
+# Should show: gym-dorian_default
+```
+
+3. Start the frontend development container:
+```bash
+cd ../gym-dorian-frontend
+docker-compose -f docker-compose.dev.yml up
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000) with hot-reload enabled.
+
+**Hot-reload**: Changes to [src/](src/), [public/](public/), and [messages/](messages/) are automatically reflected without rebuilding.
+
+### Production Build (Docker)
+
+1. Set production environment variables in `.env.docker`:
+```bash
+NEXT_PUBLIC_API_URL=https://api.yourdomain.com/api
+```
+
+2. Build and start production container:
+```bash
+docker-compose -f docker-compose.prod.yml --env-file .env.docker up --build
+```
+
+For production deployments, update the API URL to your actual production endpoint.
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run generate-types` - Generate TypeScript types from backend OpenAPI spec
+
+## Environment Variables
+
+### Build-time Variables
+
+- `NEXT_PUBLIC_API_URL` - Backend API endpoint (embedded in client bundle)
+
+### Environment Files
+
+- `.env.local` - Local development (outside Docker)
+- `.env.docker` - Docker container configuration
+
+## Docker Architecture
+
+The frontend connects to the backend via Docker's `gym-dorian_default` network:
+
+```
+┌─────────────────────────────────────────┐
+│  gym-dorian_default (Docker network)    │
+│                                          │
+│  ┌──────────┐        ┌──────────────┐  │
+│  │   api    │  ←───  │   frontend   │  │
+│  │  :8000   │        │    :3000     │  │
+│  └──────────┘        └──────────────┘  │
+│       ↓                     ↓           │
+│  ┌──────────┐               │          │
+│  │    db    │               │          │
+│  │  :5432   │               │          │
+│  └──────────┘               │          │
+└──────────────────────────────┼──────────┘
+                               │
+                        localhost:3000
+                               │
+                          [Browser]
+```
+
+**Container-to-container**: Frontend uses `http://api:8000/api` (Docker DNS)  
+**Browser-to-frontend**: User accesses `http://localhost:3000` (exposed port)
+
+## Technology Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **React**: 19.2.3
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **State Management**: Zustand
+- **Data Fetching**: TanStack Query (React Query)
+- **Forms**: React Hook Form + Zod
+- **Internationalization**: next-intl (en-US, pt-BR)
+- **Charts**: Recharts
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Backend API Documentation](../gym-dorian/README.md)
+- [API Guides](../gym-dorian/docs/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                      # Next.js App Router pages
+│   ├── (authenticated)/      # Protected routes
+│   ├── login/               # Auth pages
+│   └── register/
+├── components/              # Reusable components
+│   ├── layout/             # Header, Sidebar
+│   └── ui/                 # UI primitives
+├── lib/
+│   ├── api/                # API client & services
+│   └── stores/             # Zustand stores
+└── types/                  # TypeScript type definitions
+```
