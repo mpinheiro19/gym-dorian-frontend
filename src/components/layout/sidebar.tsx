@@ -14,6 +14,7 @@ export function Sidebar() {
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', icon: '📊' },
     { name: t('workouts'), href: '/workouts', icon: '💪' },
+    { name: 'Templates', href: '/templates', icon: '📋' },
     { name: t('analytics'), href: '/analytics', icon: '📈' },
     { name: t('profile'), href: '/profile', icon: '👤' },
     { name: t('settings'), href: '/settings', icon: '⚙️' },

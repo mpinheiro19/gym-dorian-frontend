@@ -3913,3 +3913,53 @@ export interface operations {
         };
     };
 }
+
+// ===========================
+// Custom Types - Manually Added
+// ===========================
+// These types are added manually for new features
+// TODO: Regenerate types when backend OpenAPI schema is updated
+
+export interface Exercise {
+  id: number;
+  name: string;
+  agonist_muscle_group?: string | null;
+  synergist_muscle_group?: string | null;
+  equipment_type?: string | null;
+}
+
+export interface TemplateExercise {
+  id: number;
+  template_id: number;
+  exercise_id: number;
+  exercise: Exercise;
+  order_index: number;
+  target_sets?: number | null;
+  notes?: string | null;
+}
+
+export interface WorkoutTemplate {
+  id: number;
+  user_id: number;
+  name: string;
+  description?: string | null;
+  created_at: string;
+  updated_at?: string | null;
+  exercises: TemplateExercise[];
+}
+
+export interface WorkoutTemplateCreate {
+  name: string;
+  description?: string | null;
+  exercises: {
+    exercise_id: number;
+    order_index: number;
+    target_sets?: number | null;
+    notes?: string | null;
+  }[];
+}
+
+export interface ExecuteTemplateRequest {
+  template_id: number;
+  workout_date?: string;
+}
