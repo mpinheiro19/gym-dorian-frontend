@@ -71,23 +71,23 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Loading profile...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Loading profile...</p>
       </div>
     );
   }
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Profile</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-6">Profile</h1>
 
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-surface rounded-lg shadow p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+          <h2 className="text-xl font-semibold text-text-primary">Personal Information</h2>
           {!isEditing && (
             <button
               onClick={() => setIsEditing(true)}
-              className="text-blue-600 hover:text-blue-700 font-medium"
+              className="text-accent hover:text-accent-hover font-medium"
             >
               Edit
             </button>
@@ -97,45 +97,45 @@ export default function ProfilePage() {
         {isEditing ? (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Email Address
               </label>
               <input
                 {...register('email')}
                 type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.email.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Full Name
               </label>
               <input
                 {...register('full_name')}
                 type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
               />
               {errors.full_name && (
-                <p className="mt-1 text-sm text-red-600">{errors.full_name.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.full_name.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 New Password (leave blank to keep current)
               </label>
               <input
                 {...register('password')}
                 type="password"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
                 placeholder="••••••••"
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.password.message}</p>
               )}
             </div>
 
@@ -143,7 +143,7 @@ export default function ProfilePage() {
               <button
                 type="submit"
                 disabled={updateMutation.isPending}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50"
+                className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium disabled:opacity-50"
               >
                 {updateMutation.isPending ? 'Saving...' : 'Save Changes'}
               </button>
@@ -153,7 +153,7 @@ export default function ProfilePage() {
                   setIsEditing(false);
                   reset();
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+                className="px-4 py-2 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
               >
                 Cancel
               </button>
@@ -162,20 +162,20 @@ export default function ProfilePage() {
         ) : (
           <div className="space-y-4">
             <div>
-              <p className="text-sm font-medium text-gray-700">Email</p>
-              <p className="text-lg text-gray-900">{profile?.email || user?.email}</p>
+              <p className="text-sm font-medium text-text-secondary">Email</p>
+              <p className="text-lg text-text-primary">{profile?.email || user?.email}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-700">Full Name</p>
-              <p className="text-lg text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">Full Name</p>
+              <p className="text-lg text-text-primary">
                 {profile?.full_name || user?.full_name || 'Not set'}
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-700">Account Type</p>
-              <p className="text-lg text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">Account Type</p>
+              <p className="text-lg text-text-primary">
                 {user?.is_superuser ? (
-                  <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                  <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded">
                     Administrator
                   </span>
                 ) : (
@@ -184,8 +184,8 @@ export default function ProfilePage() {
               </p>
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-700">Member Since</p>
-              <p className="text-lg text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">Member Since</p>
+              <p className="text-lg text-text-primary">
                 {user?.created_at
                   ? new Date(user.created_at).toLocaleDateString('pt-BR', {
                       year: 'numeric',

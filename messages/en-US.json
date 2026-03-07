@@ -148,7 +148,16 @@
     "english": "English (US)",
     "saveSettings": "Save Settings",
     "settingsSaved": "Settings updated successfully!",
-    "loadingSettings": "Loading settings..."
+    "loadingSettings": "Loading settings...",
+    "appearance": "Appearance",
+    "appearanceDesc": "Choose how Gym Dorian looks on your device",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeLightDesc": "Always use light mode",
+    "themeDark": "Dark",
+    "themeDarkDesc": "Always use dark mode",
+    "themeSystem": "System",
+    "themeSystemDesc": "Follow your device's theme preference"
   },
   "goals": {
     "title": "Goals",

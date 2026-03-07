@@ -18,14 +18,14 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Dashboard</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-6">Dashboard</h1>
 
       {/* Welcome Card */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">
+      <div className="bg-surface rounded-lg shadow p-6 mb-6">
+        <h2 className="text-xl font-semibold text-text-primary mb-2">
           Welcome, {user?.full_name || 'Athlete'}!
         </h2>
-        <p className="text-gray-700">
+        <p className="text-text-secondary">
           Track your workouts, monitor your progress, and achieve your fitness
           goals.
         </p>
@@ -33,11 +33,11 @@ export default function DashboardPage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-700">Total Workouts</p>
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">Total Workouts</p>
+              <p className="text-3xl font-bold text-text-primary">
                 {isLoading ? '...' : stats?.total_workouts || 0}
               </p>
             </div>
@@ -45,11 +45,11 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-700">Exercises Logged</p>
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">Exercises Logged</p>
+              <p className="text-3xl font-bold text-text-primary">
                 {isLoading ? '...' : stats?.total_exercises_logged || 0}
               </p>
             </div>
@@ -57,11 +57,11 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-700">This Week</p>
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-sm font-medium text-text-secondary">This Week</p>
+              <p className="text-3xl font-bold text-text-primary">
                 {isLoading ? '...' : stats?.workouts_this_week || 0}
               </p>
             </div>
@@ -74,18 +74,18 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <a
           href="/workouts"
-          className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow p-6 transition-colors"
+          className="bg-accent hover:bg-accent-hover text-accent-fg rounded-lg shadow p-6 transition-colors"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Log a Workout</h3>
-          <p className="text-blue-100">Start tracking your exercises now</p>
+          <h3 className="text-lg font-semibold text-accent-fg mb-2">Log a Workout</h3>
+          <p className="text-accent-fg/70">Start tracking your exercises now</p>
         </a>
 
         <a
           href="/analytics"
-          className="bg-green-600 hover:bg-green-700 text-white rounded-lg shadow p-6 transition-colors"
+          className="bg-success hover:bg-success/90 text-white rounded-lg shadow p-6 transition-colors"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">View Progress</h3>
-          <p className="text-green-100">Check your analytics and improvements</p>
+          <h3 className="text-lg font-semibold text-white mb-2">View Progress</h3>
+          <p className="text-white/70">Check your analytics and improvements</p>
         </a>
       </div>
     </div>

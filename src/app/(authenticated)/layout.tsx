@@ -45,17 +45,17 @@ export default function AuthenticatedLayout({
   // Show loading while checking auth
   if (!isAuthenticated || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-page">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-800">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+          <p className="mt-4 text-text-secondary">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-page">
       <Sidebar />
       <div className="lg:pl-64">
         <Header />
