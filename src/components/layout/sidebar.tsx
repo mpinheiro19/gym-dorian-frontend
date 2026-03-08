@@ -14,7 +14,8 @@ export function Sidebar() {
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', icon: '📊' },
     { name: t('workouts'), href: '/workouts', icon: '💪' },
-    { name: 'Templates', href: '/templates', icon: '📋' },
+    { name: t('templates'), href: '/templates', icon: '📋' },
+    { name: t('plans'), href: '/plans', icon: '📅' },
     { name: t('analytics'), href: '/analytics', icon: '📈' },
     { name: t('profile'), href: '/profile', icon: '👤' },
     { name: t('settings'), href: '/settings', icon: '⚙️' },
@@ -39,7 +40,7 @@ export function Sidebar() {
           <div className="mt-5 flex-grow flex flex-col">
             <nav className="flex-1 px-2 space-y-1">
               {navigation.map((item) => {
-                const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href + '/'));
                 return (
                   <Link
                     key={item.name}
@@ -60,7 +61,7 @@ export function Sidebar() {
                 <Link
                   href="/admin"
                   className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
-                    pathname === '/admin'
+                    pathname === '/admin' || pathname.startsWith('/admin/')
                       ? 'bg-blue-50 text-blue-600'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}

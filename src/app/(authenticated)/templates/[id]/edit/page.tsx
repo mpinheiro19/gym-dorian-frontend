@@ -1,16 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import Link from 'next/link';
 import { templatesService } from '@/lib/api/services/templates.service';
 import { workoutsService } from '@/lib/api/services/workouts.service';
 
-// Validation schemas
+// Validation schemas (same as create)
 const templateExerciseSchema = z.object({
   exercise_id: z.number().min(1, 'Please select an exercise'),
   order_index: z.number().min(0),
@@ -26,35 +27,37 @@ const templateSchema = z.object({
 
 type TemplateFormData = z.infer<typeof templateSchema>;
 
-export default function CreateTemplatePage() {
+export default function EditTemplatePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const templateId = Number(id);
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [searchTerm, setSearchTerm] = useState('');
+
+  // Fetch template data to pre-populate
+  const { data: template, isLoading: isLoadingTemplate } = useQuery({
+    queryKey: ['workout-template', templateId],
+    queryFn: () => templatesService.getTemplate(templateId),
+    enabled: !!templateId,
+  });
 
   // Fetch available exercises
-  const { data: exercises, isLoading: isLoadingExercises, error: exercisesError } = useQuery({
-    queryKey: ['exercises', searchTerm],
-    queryFn: () => workoutsService.listExercises({ search: searchTerm, limit: 100 }),
+  const { data: exercises, isLoading: isLoadingExercises } = useQuery({
+    queryKey: ['exercises', ''],
+    queryFn: () => workoutsService.listExercises({ limit: 100 }),
   });
 
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TemplateFormData>({
     resolver: zodResolver(templateSchema),
     defaultValues: {
       name: '',
       description: '',
-      exercises: [
-        {
-          exercise_id: 0,
-          order_index: 0,
-          target_sets: 3,
-          notes: '',
-        },
-      ],
+      exercises: [],
     },
   });
 
@@ -63,20 +66,36 @@ export default function CreateTemplatePage() {
     name: 'exercises',
   });
 
-  const createMutation = useMutation({
-    mutationFn: templatesService.createTemplate,
+  // Pre-populate form when template data loads
+  useEffect(() => {
+    if (template) {
+      reset({
+        name: template.name,
+        description: template.description ?? '',
+        exercises: template.exercises.map((te) => ({
+          exercise_id: te.exercise_id,
+          order_index: te.order_index,
+          target_sets: te.target_sets ?? 3,
+          notes: te.notes ?? '',
+        })),
+      });
+    }
+  }, [template, reset]);
+
+  const updateMutation = useMutation({
+    mutationFn: (data: TemplateFormData) => templatesService.updateTemplate(templateId, data),
     onSuccess: () => {
-      toast.success('Template created successfully!');
+      toast.success('Template updated successfully!');
       queryClient.invalidateQueries({ queryKey: ['workout-templates'] });
+      queryClient.invalidateQueries({ queryKey: ['workout-template', templateId] });
       router.push('/templates');
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.detail || 'Failed to create template');
+      toast.error(error.response?.data?.detail || 'Failed to update template');
     },
   });
 
   const onSubmit = (data: TemplateFormData) => {
-    // Update order_index based on current order
     const formattedData = {
       ...data,
       exercises: data.exercises.map((ex, index) => ({
@@ -84,18 +103,38 @@ export default function CreateTemplatePage() {
         order_index: index,
       })),
     };
-    createMutation.mutate(formattedData);
+    updateMutation.mutate(formattedData);
   };
+
+  if (isLoadingTemplate) {
+    return (
+      <div className="text-center py-12">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-gray-800">Loading template...</p>
+      </div>
+    );
+  }
+
+  if (!template) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600 mb-4">Template not found</p>
+        <Link href="/templates" className="text-blue-600 hover:underline">Back to Templates</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Create Workout Template</h1>
+      <div className="flex items-center gap-4 mb-6">
+        <Link href="/templates" className="text-gray-500 hover:text-gray-700">← Back</Link>
+        <h1 className="text-3xl font-bold text-gray-900">Edit Template</h1>
+      </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Template Details */}
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Template Details</h2>
-
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -105,13 +144,12 @@ export default function CreateTemplatePage() {
                 type="text"
                 {...register('name')}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
-                placeholder="e.g., Treino A - Peito e Tríceps"
+                placeholder="e.g., Push Day A"
               />
               {errors.name && (
                 <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
               )}
             </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Description
@@ -146,11 +184,15 @@ export default function CreateTemplatePage() {
             </button>
           </div>
 
+          {errors.exercises && (
+            <p className="text-sm text-red-600">{errors.exercises.message}</p>
+          )}
+
           {fields.map((field, index) => (
             <div key={field.id} className="bg-white rounded-lg shadow p-6">
               <div className="flex items-start gap-4">
                 {/* Order Controls */}
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 items-center">
                   <button
                     type="button"
                     onClick={() => index > 0 && move(index, index - 1)}
@@ -159,9 +201,7 @@ export default function CreateTemplatePage() {
                   >
                     ▲
                   </button>
-                  <span className="text-center font-medium text-gray-600">
-                    {index + 1}
-                  </span>
+                  <span className="text-center font-medium text-gray-600">{index + 1}</span>
                   <button
                     type="button"
                     onClick={() => index < fields.length - 1 && move(index, index + 1)}
@@ -179,17 +219,12 @@ export default function CreateTemplatePage() {
                       Exercise *
                     </label>
                     <select
-                      {...register(`exercises.${index}.exercise_id`, {
-                        valueAsNumber: true,
-                      })}
+                      {...register(`exercises.${index}.exercise_id`, { valueAsNumber: true })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
                       disabled={isLoadingExercises}
                     >
                       <option value={0}>
-                        {isLoadingExercises ? 'Loading exercises...' :
-                         exercisesError ? 'Error loading exercises' :
-                         !exercises || exercises.length === 0 ? 'No exercises found' :
-                         'Select an exercise...'}
+                        {isLoadingExercises ? 'Loading exercises...' : 'Select an exercise...'}
                       </option>
                       {exercises?.map((ex: any) => (
                         <option key={ex.id} value={ex.id}>
@@ -198,11 +233,6 @@ export default function CreateTemplatePage() {
                         </option>
                       ))}
                     </select>
-                    {exercisesError && (
-                      <p className="mt-1 text-sm text-red-600">
-                        Failed to load exercises. Please try refreshing the page.
-                      </p>
-                    )}
                     {errors.exercises?.[index]?.exercise_id && (
                       <p className="mt-1 text-sm text-red-600">
                         {errors.exercises[index]?.exercise_id?.message}
@@ -217,9 +247,7 @@ export default function CreateTemplatePage() {
                       </label>
                       <input
                         type="number"
-                        {...register(`exercises.${index}.target_sets`, {
-                          valueAsNumber: true,
-                        })}
+                        {...register(`exercises.${index}.target_sets`, { valueAsNumber: true })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
                         min="1"
                         max="20"
@@ -228,14 +256,12 @@ export default function CreateTemplatePage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Notes
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
                     <input
                       type="text"
                       {...register(`exercises.${index}.notes`)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
-                      placeholder="e.g., Focus on form, go slow..."
+                      placeholder="e.g., Focus on form..."
                     />
                   </div>
                 </div>
@@ -259,10 +285,10 @@ export default function CreateTemplatePage() {
         <div className="flex gap-4">
           <button
             type="submit"
-            disabled={createMutation.isPending}
+            disabled={updateMutation.isPending}
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium disabled:opacity-50"
           >
-            {createMutation.isPending ? 'Creating...' : 'Create Template'}
+            {updateMutation.isPending ? 'Saving...' : 'Update Template'}
           </button>
           <button
             type="button"

@@ -122,6 +122,12 @@ export default function TemplatesPage() {
                   Start Workout
                 </button>
                 <div className="flex gap-2">
+                  <Link
+                    href={`/templates/${template.id}/edit`}
+                    className="flex-1 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md text-sm font-medium border border-blue-300 text-center"
+                  >
+                    Edit
+                  </Link>
                   <button
                     onClick={() => handleDeleteTemplate(template.id, template.name)}
                     disabled={deleteMutation.isPending}

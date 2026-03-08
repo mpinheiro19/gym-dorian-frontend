@@ -104,7 +104,7 @@ export default function ExecuteTemplatePage() {
   });
 
   const onSubmit = (data: WorkoutFormData) => {
-    createWorkoutMutation.mutate(data as any);
+    createWorkoutMutation.mutate({ ...data, template_id: templateId } as any);
   };
 
   if (isLoading) {
