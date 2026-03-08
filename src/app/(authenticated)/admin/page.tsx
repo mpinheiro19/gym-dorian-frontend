@@ -31,7 +31,7 @@ export default function AdminPage() {
   if (!user?.is_superuser) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600">Access denied. Admin privileges required.</p>
+        <p className="text-error">Access denied. Admin privileges required.</p>
       </div>
     );
   }
@@ -41,97 +41,97 @@ export default function AdminPage() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Loading admin dashboard...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Loading admin dashboard...</p>
       </div>
     );
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-6">Admin Dashboard</h1>
 
       {/* System Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Users</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Users</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.user_stats?.total_users || 0}
           </p>
-          <p className="text-xs text-green-600 mt-1">
+          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
             {dashboard?.user_stats?.active_users || 0} active
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Workouts</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Workouts</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.workout_stats?.total_workouts || 0}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Exercises</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Exercises</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.workout_stats?.total_exercises_logged || 0}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Goals</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Goals</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.goal_stats?.total_goals || 0}
           </p>
-          <p className="text-xs text-green-600 mt-1">
+          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
             {dashboard?.goal_stats?.completed_goals || 0} completed
           </p>
         </div>
       </div>
 
       {/* User Management */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">User Management</h2>
+      <div className="bg-surface rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-xl font-semibold text-text-primary">User Management</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-surface-secondary">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   User
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   Email
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   Role
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   Joined
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-muted uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-surface divide-y divide-border">
               {users && users.length > 0 ? (
                 users.map((u: any) => (
                   <tr key={u.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-text-primary">
                         {u.full_name || 'N/A'}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{u.email}</div>
+                      <div className="text-sm text-text-primary">{u.email}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-2 py-1 text-xs rounded-full ${
                           u.is_active
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800'
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                         }`}
                       >
                         {u.is_active ? 'Active' : 'Inactive'}
@@ -141,21 +141,21 @@ export default function AdminPage() {
                       <span
                         className={`px-2 py-1 text-xs rounded-full ${
                           u.is_superuser
-                            ? 'bg-purple-100 text-purple-800'
-                            : 'bg-gray-100 text-gray-800'
+                            ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
+                            : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
                         }`}
                       >
                         {u.is_superuser ? 'Admin' : 'User'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-text-muted">
                       {new Date(u.created_at).toLocaleDateString("pt-BR")}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <button className="text-blue-600 hover:text-blue-800 mr-3">
+                      <button className="text-accent hover:text-accent-hover mr-3">
                         View
                       </button>
-                      <button className="text-gray-600 hover:text-gray-800">
+                      <button className="text-text-tertiary hover:text-text-primary">
                         {u.is_active ? 'Disable' : 'Enable'}
                       </button>
                     </td>
@@ -163,7 +163,7 @@ export default function AdminPage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-4 text-center text-text-muted">
                     No users found
                   </td>
                 </tr>

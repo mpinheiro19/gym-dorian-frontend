@@ -150,7 +150,16 @@
     "english": "English (US)",
     "saveSettings": "Salvar Configurações",
     "settingsSaved": "Configurações salvas com sucesso!",
-    "loadingSettings": "Carregando configurações..."
+    "loadingSettings": "Carregando configurações...",
+    "appearance": "Aparência",
+    "appearanceDesc": "Escolha como o Gym Dorian aparece no seu dispositivo",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeLightDesc": "Sempre usar modo claro",
+    "themeDark": "Escuro",
+    "themeDarkDesc": "Sempre usar modo escuro",
+    "themeSystem": "Sistema",
+    "themeSystemDesc": "Seguir a preferência de tema do dispositivo"
   },
   "goals": {
     "title": "Objetivos",

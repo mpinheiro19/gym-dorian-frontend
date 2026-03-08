@@ -110,8 +110,8 @@ export default function ExecuteTemplatePage() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Preparing workout...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Preparing workout...</p>
       </div>
     );
   }
@@ -119,54 +119,54 @@ export default function ExecuteTemplatePage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-text-primary">
           Execute: {preparedData?.template_name}
         </h1>
-        <p className="text-gray-600 mt-2">
+        <p className="text-text-tertiary mt-2">
           Fill in your sets, reps, and weights for each exercise
         </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Workout Details */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">
             Workout Details
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Date *
               </label>
               <input
                 type="date"
                 {...register('workout_date')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Duration (minutes)
               </label>
               <input
                 type="number"
                 {...register('duration_minutes', { valueAsNumber: true })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                 placeholder="60"
               />
             </div>
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-text-secondary mb-1">
               Notes
             </label>
             <textarea
               {...register('notes')}
               rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+              className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
               placeholder="How did it feel?"
             />
           </div>
@@ -174,7 +174,7 @@ export default function ExecuteTemplatePage() {
 
         {/* Exercises */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-900">Exercises</h2>
+          <h2 className="text-xl font-semibold text-text-primary">Exercises</h2>
 
           {exerciseFields.map((exercise, exerciseIndex) => {
             const exerciseData = preparedData?.exercises[exerciseIndex];
@@ -197,14 +197,14 @@ export default function ExecuteTemplatePage() {
           <button
             type="submit"
             disabled={createWorkoutMutation.isPending}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium disabled:opacity-50"
+            className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-6 py-3 rounded-md font-medium disabled:opacity-50"
           >
             {createWorkoutMutation.isPending ? 'Saving...' : 'Finish Workout'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+            className="px-6 py-3 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
           >
             Cancel
           </button>
@@ -222,18 +222,18 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
   });
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-surface rounded-lg shadow p-6">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">
+        <h3 className="text-lg font-semibold text-text-primary">
           {exerciseIndex + 1}. {exerciseData?.exercise.name}
         </h3>
         {exerciseData?.exercise.agonist_muscle_group && (
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-text-tertiary">
             {exerciseData.exercise.agonist_muscle_group}
           </p>
         )}
         {exerciseData?.notes && (
-          <p className="text-sm text-blue-600 mt-1 italic">
+          <p className="text-sm text-accent mt-1 italic">
             Note: {exerciseData.notes}
           </p>
         )}
@@ -242,7 +242,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
       {/* Sets Grid */}
       <div className="space-y-3">
         <div className="flex justify-between items-center">
-          <h4 className="text-sm font-medium text-gray-700">Sets</h4>
+          <h4 className="text-sm font-medium text-text-secondary">Sets</h4>
           <button
             type="button"
             onClick={() =>
@@ -252,13 +252,13 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                 weight: 0,
               })
             }
-            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+            className="text-sm text-accent hover:text-accent-hover font-medium"
           >
             + Add Set
           </button>
         </div>
 
-        <div className="grid grid-cols-12 gap-2 text-xs font-medium text-gray-600 px-2">
+        <div className="grid grid-cols-12 gap-2 text-xs font-medium text-text-tertiary px-2">
           <div className="col-span-1">Set</div>
           <div className="col-span-3">Reps</div>
           <div className="col-span-3">Weight</div>
@@ -269,7 +269,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
 
         {setFields.map((set, setIndex) => (
           <div key={set.id} className="grid grid-cols-12 gap-2 items-center">
-            <div className="col-span-1 text-center font-medium text-gray-600">
+            <div className="col-span-1 text-center font-medium text-text-tertiary">
               {setIndex + 1}
             </div>
             <div className="col-span-3">
@@ -278,7 +278,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.reps`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="1"
               />
             </div>
@@ -289,7 +289,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.weight`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="0"
               />
             </div>
@@ -299,7 +299,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.rpe`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="1"
                 max="10"
                 placeholder="1-10"
@@ -312,7 +312,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                   `exercises.${exerciseIndex}.sets.${setIndex}.rest_time_seconds`,
                   { valueAsNumber: true }
                 )}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="0"
                 placeholder="60"
               />
@@ -322,7 +322,7 @@ function ExecuteExerciseForm({ exerciseIndex, exerciseData, control, register, e
                 <button
                   type="button"
                   onClick={() => remove(setIndex)}
-                  className="text-red-600 hover:text-red-700 text-sm"
+                  className="text-error hover:opacity-80 text-sm"
                 >
                   ✕
                 </button>

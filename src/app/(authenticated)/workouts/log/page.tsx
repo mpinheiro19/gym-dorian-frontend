@@ -86,16 +86,16 @@ export default function LogWorkoutPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Log Workout</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-6">Log Workout</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Workout Details */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Workout Details</h2>
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Workout Details</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Date *
               </label>
               <input
@@ -103,34 +103,34 @@ export default function LogWorkoutPage() {
                 lang="pt-BR"
                 placeholder="dd/mm/aaaa"
                 {...register('workout_date')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
               />
               {errors.workout_date && (
-                <p className="mt-1 text-sm text-red-600">{errors.workout_date.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.workout_date.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Duration (minutes)
               </label>
               <input
                 type="number"
                 {...register('duration_minutes', { valueAsNumber: true })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary placeholder-text-muted"
                 placeholder="60"
               />
             </div>
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-text-secondary mb-1">
               Notes
             </label>
             <textarea
               {...register('notes')}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+              className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary placeholder-text-muted"
               placeholder="How did it feel?"
             />
           </div>
@@ -139,7 +139,7 @@ export default function LogWorkoutPage() {
         {/* Exercises */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-900">Exercises</h2>
+            <h2 className="text-xl font-semibold text-text-primary">Exercises</h2>
             <button
               type="button"
               onClick={() =>
@@ -148,7 +148,7 @@ export default function LogWorkoutPage() {
                   sets: [{ set_number: 1, reps: 10, weight: 0 }],
                 })
               }
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              className="bg-success hover:bg-success/90 text-white px-4 py-2 rounded-md text-sm font-medium"
             >
               + Add Exercise
             </button>
@@ -174,14 +174,14 @@ export default function LogWorkoutPage() {
           <button
             type="submit"
             disabled={createWorkoutMutation.isPending}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium disabled:opacity-50"
+            className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-6 py-3 rounded-md font-medium disabled:opacity-50"
           >
             {createWorkoutMutation.isPending ? 'Saving...' : 'Save Workout'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+            className="px-6 py-3 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
           >
             Cancel
           </button>
@@ -207,17 +207,17 @@ function ExerciseForm({
   });
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-surface rounded-lg shadow p-6">
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-text-secondary mb-1">
             Exercise *
           </label>
           <select
             {...register(`exercises.${exerciseIndex}.exercise_id`, {
               valueAsNumber: true,
             })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+            className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
           >
             <option value={0}>Select an exercise...</option>
             {exercises.map((ex: any) => (
@@ -227,7 +227,7 @@ function ExerciseForm({
             ))}
           </select>
           {errors.exercises?.[exerciseIndex]?.exercise_id && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-sm text-error">
               {errors.exercises[exerciseIndex].exercise_id.message}
             </p>
           )}
@@ -236,7 +236,7 @@ function ExerciseForm({
           <button
             type="button"
             onClick={onRemove}
-            className="ml-4 text-red-600 hover:text-red-700 font-medium"
+            className="ml-4 text-error hover:opacity-80 font-medium"
           >
             Remove
           </button>
@@ -246,7 +246,7 @@ function ExerciseForm({
       {/* Sets */}
       <div className="space-y-3">
         <div className="flex justify-between items-center">
-          <h4 className="text-sm font-medium text-gray-700">Sets</h4>
+          <h4 className="text-sm font-medium text-text-secondary">Sets</h4>
           <button
             type="button"
             onClick={() =>
@@ -256,13 +256,13 @@ function ExerciseForm({
                 weight: 0,
               })
             }
-            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+            className="text-sm text-accent hover:text-accent-hover font-medium"
           >
             + Add Set
           </button>
         </div>
 
-        <div className="grid grid-cols-12 gap-2 text-xs font-medium text-gray-600 px-2">
+        <div className="grid grid-cols-12 gap-2 text-xs font-medium text-text-tertiary px-2">
           <div className="col-span-1">Set</div>
           <div className="col-span-3">Reps</div>
           <div className="col-span-3">Weight</div>
@@ -273,7 +273,7 @@ function ExerciseForm({
 
         {setFields.map((set, setIndex) => (
           <div key={set.id} className="grid grid-cols-12 gap-2 items-center">
-            <div className="col-span-1 text-center font-medium text-gray-600">
+            <div className="col-span-1 text-center font-medium text-text-tertiary">
               {setIndex + 1}
             </div>
             <div className="col-span-3">
@@ -282,7 +282,7 @@ function ExerciseForm({
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.reps`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="1"
               />
             </div>
@@ -293,7 +293,7 @@ function ExerciseForm({
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.weight`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary"
                 min="0"
               />
             </div>
@@ -303,7 +303,7 @@ function ExerciseForm({
                 {...register(`exercises.${exerciseIndex}.sets.${setIndex}.rpe`, {
                   valueAsNumber: true,
                 })}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary placeholder-text-muted"
                 min="1"
                 max="10"
                 placeholder="1-10"
@@ -316,7 +316,7 @@ function ExerciseForm({
                   `exercises.${exerciseIndex}.sets.${setIndex}.rest_time_seconds`,
                   { valueAsNumber: true }
                 )}
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm text-gray-900 placeholder-gray-400"
+                className="w-full px-2 py-1 border border-border-input rounded text-sm bg-surface text-text-primary placeholder-text-muted"
                 min="0"
                 placeholder="60"
               />
@@ -326,7 +326,7 @@ function ExerciseForm({
                 <button
                   type="button"
                   onClick={() => removeSet(setIndex)}
-                  className="text-red-600 hover:text-red-700 text-sm"
+                  className="text-error hover:opacity-80 text-sm"
                 >
                   ✕
                 </button>

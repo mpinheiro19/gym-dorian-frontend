@@ -89,37 +89,37 @@ export default function CreateTemplatePage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Create Workout Template</h1>
+      <h1 className="text-3xl font-bold text-text-primary mb-6">Create Workout Template</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Template Details */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Template Details</h2>
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Template Details</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Template Name *
               </label>
               <input
                 type="text"
                 {...register('name')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                 placeholder="e.g., Treino A - Peito e Tríceps"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.name.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Description
               </label>
               <textarea
                 {...register('description')}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                 placeholder="Describe this workout template..."
               />
             </div>
@@ -129,7 +129,7 @@ export default function CreateTemplatePage() {
         {/* Exercises */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-900">Exercises</h2>
+            <h2 className="text-xl font-semibold text-text-primary">Exercises</h2>
             <button
               type="button"
               onClick={() =>
@@ -140,14 +140,14 @@ export default function CreateTemplatePage() {
                   notes: '',
                 })
               }
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              className="bg-success hover:bg-success/90 text-white px-4 py-2 rounded-md text-sm font-medium"
             >
               + Add Exercise
             </button>
           </div>
 
           {fields.map((field, index) => (
-            <div key={field.id} className="bg-white rounded-lg shadow p-6">
+            <div key={field.id} className="bg-surface rounded-lg shadow p-6">
               <div className="flex items-start gap-4">
                 {/* Order Controls */}
                 <div className="flex flex-col gap-1">
@@ -155,18 +155,18 @@ export default function CreateTemplatePage() {
                     type="button"
                     onClick={() => index > 0 && move(index, index - 1)}
                     disabled={index === 0}
-                    className="text-gray-500 hover:text-gray-700 disabled:opacity-30"
+                    className="text-text-tertiary hover:text-text-primary disabled:opacity-30"
                   >
                     ▲
                   </button>
-                  <span className="text-center font-medium text-gray-600">
+                  <span className="text-center font-medium text-text-tertiary">
                     {index + 1}
                   </span>
                   <button
                     type="button"
                     onClick={() => index < fields.length - 1 && move(index, index + 1)}
                     disabled={index === fields.length - 1}
-                    className="text-gray-500 hover:text-gray-700 disabled:opacity-30"
+                    className="text-text-tertiary hover:text-text-primary disabled:opacity-30"
                   >
                     ▼
                   </button>
@@ -175,14 +175,14 @@ export default function CreateTemplatePage() {
                 {/* Exercise Form */}
                 <div className="flex-1 space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-text-secondary mb-1">
                       Exercise *
                     </label>
                     <select
                       {...register(`exercises.${index}.exercise_id`, {
                         valueAsNumber: true,
                       })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                      className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                       disabled={isLoadingExercises}
                     >
                       <option value={0}>
@@ -199,12 +199,12 @@ export default function CreateTemplatePage() {
                       ))}
                     </select>
                     {exercisesError && (
-                      <p className="mt-1 text-sm text-red-600">
+                      <p className="mt-1 text-sm text-error">
                         Failed to load exercises. Please try refreshing the page.
                       </p>
                     )}
                     {errors.exercises?.[index]?.exercise_id && (
-                      <p className="mt-1 text-sm text-red-600">
+                      <p className="mt-1 text-sm text-error">
                         {errors.exercises[index]?.exercise_id?.message}
                       </p>
                     )}
@@ -212,7 +212,7 @@ export default function CreateTemplatePage() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-text-secondary mb-1">
                         Target Sets
                       </label>
                       <input
@@ -220,7 +220,7 @@ export default function CreateTemplatePage() {
                         {...register(`exercises.${index}.target_sets`, {
                           valueAsNumber: true,
                         })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                        className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                         min="1"
                         max="20"
                       />
@@ -228,13 +228,13 @@ export default function CreateTemplatePage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-text-secondary mb-1">
                       Notes
                     </label>
                     <input
                       type="text"
                       {...register(`exercises.${index}.notes`)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                      className="w-full px-3 py-2 border border-border-input rounded-md bg-surface text-text-primary"
                       placeholder="e.g., Focus on form, go slow..."
                     />
                   </div>
@@ -245,7 +245,7 @@ export default function CreateTemplatePage() {
                   <button
                     type="button"
                     onClick={() => remove(index)}
-                    className="text-red-600 hover:text-red-700 font-medium"
+                    className="text-error hover:opacity-80 font-medium"
                   >
                     Remove
                   </button>
@@ -260,14 +260,14 @@ export default function CreateTemplatePage() {
           <button
             type="submit"
             disabled={createMutation.isPending}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium disabled:opacity-50"
+            className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-6 py-3 rounded-md font-medium disabled:opacity-50"
           >
             {createMutation.isPending ? 'Creating...' : 'Create Template'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+            className="px-6 py-3 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
           >
             Cancel
           </button>
