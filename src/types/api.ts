@@ -3963,3 +3963,98 @@ export interface ExecuteTemplateRequest {
   template_id: number;
   workout_date?: string;
 }
+
+// ===========================
+// Plan Types
+// ===========================
+
+export type PlanStatus = 'active' | 'queued' | 'paused' | 'completed' | 'archived';
+
+export interface PlanDay {
+  id: number;
+  week_id: number;
+  day_of_week: number; // 0=Mon … 6=Sun
+  template_id: number;
+  template?: WorkoutTemplate;
+  notes?: string | null;
+}
+
+export interface PlanWeek {
+  id: number;
+  plan_id: number;
+  week_number: number;
+  name?: string | null;
+  days: PlanDay[];
+}
+
+export interface WorkoutPlan {
+  id: number;
+  user_id: number;
+  name: string;
+  description?: string | null;
+  status: PlanStatus;
+  start_date?: string | null;
+  created_at: string;
+  updated_at?: string | null;
+  weeks: PlanWeek[];
+}
+
+export interface PlanDayCreate {
+  day_of_week: number;
+  template_id: number;
+  notes?: string | null;
+}
+
+export interface PlanWeekCreate {
+  week_number: number;
+  name?: string | null;
+  days: PlanDayCreate[];
+}
+
+export interface WorkoutPlanCreate {
+  name: string;
+  description?: string | null;
+  weeks: PlanWeekCreate[];
+}
+
+export interface WorkoutPlanUpdate {
+  name?: string | null;
+  description?: string | null;
+  weeks?: PlanWeekCreate[] | null;
+}
+
+export interface PlanStatusUpdate {
+  status: PlanStatus;
+}
+
+export interface TodayWorkout {
+  is_rest_day: false;
+  plan_id: number;
+  plan_name: string;
+  week_number: number;
+  day_name: string;
+  template_id: number;
+  template_name: string;
+  template_description?: string | null;
+}
+
+export interface RestDay {
+  is_rest_day: true;
+  plan_id: number;
+  plan_name: string;
+  week_number: number;
+  day_name: string;
+}
+
+export type TodayWorkoutResponse = TodayWorkout | RestDay;
+
+export interface WorkoutSession {
+  id: number;
+  user_id: number;
+  workout_date: string;
+  duration_minutes?: number | null;
+  notes?: string | null;
+  template_id?: number | null;
+  plan_id?: number | null;
+}
+
