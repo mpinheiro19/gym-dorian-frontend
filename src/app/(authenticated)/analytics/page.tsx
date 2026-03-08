@@ -65,8 +65,8 @@ export default function AnalyticsPage() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Loading analytics...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Loading analytics...</p>
       </div>
     );
   }
@@ -74,13 +74,13 @@ export default function AnalyticsPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+        <h1 className="text-3xl font-bold text-text-primary">Analytics</h1>
         <div className="flex items-center space-x-4">
-          <label className="text-sm text-gray-800">Time Range:</label>
+          <label className="text-sm text-text-secondary">Time Range:</label>
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(Number(e.target.value))}
-            className="px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+            className="px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
           >
             <option value={7}>Last 7 days</option>
             <option value={30}>Last 30 days</option>
@@ -93,36 +93,36 @@ export default function AnalyticsPage() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Workouts</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Workouts</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.total_workouts || 0}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Volume</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Volume</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.total_volume?.toLocaleString() || 0}
           </p>
-          <p className="text-xs text-gray-700">kg</p>
+          <p className="text-xs text-text-tertiary">kg</p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Sets</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Sets</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.total_sets || 0}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-sm text-gray-800">Total Reps</p>
-          <p className="text-3xl font-bold text-gray-900">
+        <div className="bg-surface rounded-lg shadow p-6">
+          <p className="text-sm text-text-secondary">Total Reps</p>
+          <p className="text-3xl font-bold text-text-primary">
             {dashboard?.total_reps || 0}
           </p>
         </div>
       </div>
 
       {/* Weekly Volume Chart */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Weekly Volume Trend</h2>
+      <div className="bg-surface rounded-lg shadow p-6 mb-6">
+        <h2 className="text-xl font-semibold text-text-primary mb-4">Weekly Volume Trend</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={weeklyVolume || []}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -137,8 +137,8 @@ export default function AnalyticsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* Muscle Distribution */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Muscle Group Distribution</h2>
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Muscle Group Distribution</h2>
           {muscleDistribution && muscleDistribution.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -149,9 +149,9 @@ export default function AnalyticsPage() {
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  label={(entry) => `${entry.muscle_group}: ${entry.percentage.toFixed(1)}%`}
-                  labelLine={{ stroke: '#374151', strokeWidth: 1 }}
-                  style={{ fontSize: '14px', fontWeight: '600', fill: '#1F2937' }}
+                  label={(entry: any) => `${entry.muscle_group}: ${entry.percentage.toFixed(1)}%`}
+                  labelLine={{ stroke: 'var(--color-border)', strokeWidth: 1 }}
+                  style={{ fontSize: '14px', fontWeight: '600', fill: 'var(--color-text-primary)' }}
                 >
                   {muscleDistribution.map((_: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -161,51 +161,51 @@ export default function AnalyticsPage() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <p className="text-gray-800 text-center py-12">No data available</p>
+            <p className="text-text-secondary text-center py-12">No data available</p>
           )}
         </div>
         {/* Personal Records */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Personal Records</h2>
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Personal Records</h2>
           <div className="space-y-3 max-h-[300px] overflow-y-auto">
             {personalRecords && personalRecords.length > 0 ? (
               personalRecords.slice(0, 10).map((record: any) => (
                 <div
                   key={record.exercise_id}
-                  className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
+                  className="flex justify-between items-center p-3 bg-surface-secondary rounded-lg"
                 >
                   <div>
-                    <p className="font-medium text-gray-900">{record.exercise_name}</p>
-                    <p className="text-xs text-gray-700">
+                    <p className="font-medium text-text-primary">{record.exercise_name}</p>
+                    <p className="text-xs text-text-tertiary">
                       {new Date(record.achieved_date).toLocaleDateString("pt-BR")}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-blue-600">
+                    <p className="text-2xl font-bold text-accent">
                       {record.max_weight}
-                      <span className="text-sm text-gray-800"> kg</span>
+                      <span className="text-sm text-text-secondary"> kg</span>
                     </p>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-gray-800 text-center py-12">No records yet</p>
+              <p className="text-text-secondary text-center py-12">No records yet</p>
             )}
           </div>
         </div>
       </div>
 
       {/* Exercise Progress */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Exercise Progress</h2>
+      <div className="bg-surface rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-text-primary mb-4">Exercise Progress</h2>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-text-secondary mb-2">
             Select Exercise
           </label>
           <select
             value={selectedExercise || ''}
             onChange={(e) => setSelectedExercise(Number(e.target.value) || null)}
-            className="w-full md:w-96 px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+            className="w-full md:w-96 px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
           >
             <option value="">Choose an exercise...</option>
             {exercises?.map((exercise: any) => (
@@ -219,27 +219,27 @@ export default function AnalyticsPage() {
         {exerciseProgress ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-800">Starting Weight</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <p className="text-sm text-text-secondary">Starting Weight</p>
+                <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.starting_weight} kg
                 </p>
               </div>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-800">Current Weight</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                <p className="text-sm text-text-secondary">Current Weight</p>
+                <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.current_weight} kg
                 </p>
               </div>
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-800">Weight Gain</p>
-                <p className="text-2xl font-bold text-green-600">
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                <p className="text-sm text-text-secondary">Weight Gain</p>
+                <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                   +{exerciseProgress.weight_gain} kg
                 </p>
               </div>
-              <div className="bg-orange-50 p-4 rounded-lg">
-                <p className="text-sm text-gray-800">Total Workouts</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+                <p className="text-sm text-text-secondary">Total Workouts</p>
+                <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.total_workouts}
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function AnalyticsPage() {
             </ResponsiveContainer>
           </>
         ) : (
-          <p className="text-gray-800 text-center py-12">
+          <p className="text-text-secondary text-center py-12">
             Select an exercise to view progress
           </p>
         )}

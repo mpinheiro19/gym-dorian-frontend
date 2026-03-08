@@ -112,8 +112,8 @@ export default function GoalsPage() {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Loading goals...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Loading goals...</p>
       </div>
     );
   }
@@ -121,7 +121,7 @@ export default function GoalsPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Goals</h1>
+        <h1 className="text-3xl font-bold text-text-primary">Goals</h1>
         {!isCreating && (
           <button
             onClick={() => {
@@ -129,7 +129,7 @@ export default function GoalsPage() {
               setEditingGoal(null);
               reset();
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium"
+            className="bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium"
           >
             + New Goal
           </button>
@@ -137,19 +137,19 @@ export default function GoalsPage() {
       </div>
 
       {isCreating && (
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <div className="bg-surface rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">
             {editingGoal ? 'Edit Goal' : 'Create New Goal'}
           </h2>
           
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Goal Type *
               </label>
               <select
                 {...register('goal_type')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
               >
                 <option value="strength">Strength</option>
                 <option value="muscle_gain">Muscle Gain</option>
@@ -161,48 +161,48 @@ export default function GoalsPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Title *
               </label>
               <input
                 {...register('title')}
                 type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
                 placeholder="e.g., Bench press 100kg"
               />
               {errors.title && (
-                <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.title.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Description
               </label>
               <textarea
                 {...register('description')}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
                 placeholder="Add details about your goal..."
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-text-secondary mb-1">
                   Target Value
                 </label>
                 <input
                   {...register('target_value', { valueAsNumber: true })}
                   type="number"
                   step="0.1"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400"
+                  className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary placeholder-text-muted bg-surface"
                   placeholder="100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-text-secondary mb-1">
                   Target Date
                 </label>
                 <input
@@ -210,19 +210,19 @@ export default function GoalsPage() {
                   type="date"
                 lang="pt-BR"
                 placeholder="dd/mm/aaaa"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                  className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
                 />
               </div>
             </div>
 
             {editingGoal && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-text-secondary mb-1">
                   Status
                 </label>
                 <select
                   {...register('status')}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                  className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
                 >
                   <option value="active">Active</option>
                   <option value="completed">Completed</option>
@@ -235,7 +235,7 @@ export default function GoalsPage() {
               <button
                 type="submit"
                 disabled={createMutation.isPending || updateMutation.isPending}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50"
+                className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium disabled:opacity-50"
               >
                 {createMutation.isPending || updateMutation.isPending
                   ? 'Saving...'
@@ -250,7 +250,7 @@ export default function GoalsPage() {
                   setEditingGoal(null);
                   reset();
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+                className="px-4 py-2 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
               >
                 Cancel
               </button>
@@ -263,32 +263,32 @@ export default function GoalsPage() {
       <div className="space-y-4">
         {goals && goals.length > 0 ? (
           goals.map((goal: any) => (
-            <div key={goal.id} className="bg-white rounded-lg shadow p-6">
+            <div key={goal.id} className="bg-surface rounded-lg shadow p-6">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <h3 className="text-xl font-semibold text-text-primary">
                       {goal.title}
                     </h3>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${
                         goal.status === 'active'
-                          ? 'bg-green-100 text-green-800'
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
                           : goal.status === 'completed'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-gray-100 text-gray-800'
+                          ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
                       }`}
                     >
                       {goal.status}
                     </span>
-                    <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded-full">
                       {goal.goal_type.replace('_', ' ')}
                     </span>
                   </div>
                   {goal.description && (
-                    <p className="text-gray-600 mb-3">{goal.description}</p>
+                    <p className="text-text-tertiary mb-3">{goal.description}</p>
                   )}
-                  <div className="flex gap-6 text-sm text-gray-600">
+                  <div className="flex gap-6 text-sm text-text-tertiary">
                     {goal.target_value && (
                       <div>
                         <span className="font-medium">Target:</span> {goal.target_value}
@@ -306,13 +306,13 @@ export default function GoalsPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(goal)}
-                    className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+                    className="text-accent hover:text-accent-hover font-medium text-sm"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(goal.id)}
-                    className="text-red-600 hover:text-red-700 font-medium text-sm"
+                    className="text-error hover:text-error font-medium text-sm"
                   >
                     Delete
                   </button>
@@ -321,15 +321,15 @@ export default function GoalsPage() {
             </div>
           ))
         ) : (
-          <div className="text-center py-12 bg-white rounded-lg shadow">
-            <p className="text-gray-600 mb-4">No goals set yet</p>
+          <div className="text-center py-12 bg-surface rounded-lg shadow">
+            <p className="text-text-tertiary mb-4">No goals set yet</p>
             <button
               onClick={() => {
                 setIsCreating(true);
                 setEditingGoal(null);
                 reset();
               }}
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium"
+              className="inline-block bg-accent hover:bg-accent-hover text-accent-fg px-6 py-3 rounded-md font-medium"
             >
               Create Your First Goal
             </button>

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { components } from '@/types/api';
 
-type User = components['schemas']['User'];
+type User = components['schemas']['UserResponse'];
 
 interface AuthState {
   user: User | null;

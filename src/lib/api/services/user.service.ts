@@ -1,9 +1,9 @@
 import apiClient from '../client';
 import type { components } from '@/types/api';
 
-type User = components['schemas']['User'];
-type UserSettings = components['schemas']['UserSettings'];
-type UserGoal = components['schemas']['UserGoal'];
+type User = components['schemas']['UserResponse'];
+type UserSettings = components['schemas']['UserSettingsResponse'];
+type UserGoal = components['schemas']['UserGoalResponse'];
 
 export interface UpdateProfileData {
   email?: string;

@@ -62,18 +62,18 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-page px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900">Gym Dorian</h1>
-          <h2 className="mt-6 text-3xl font-semibold text-gray-900">
+          <h1 className="text-4xl font-bold text-text-primary">Gym Dorian</h1>
+          <h2 className="mt-6 text-3xl font-semibold text-text-primary">
             Create your account
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-text-tertiary">
             Already have an account?{' '}
             <Link
               href="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-accent hover:text-accent-hover"
             >
               Sign in
             </Link>
@@ -85,7 +85,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 Email address
               </label>
@@ -94,17 +94,17 @@ export default function RegisterPage() {
                 id="email"
                 type="email"
                 autoComplete="email"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-border-input rounded-md shadow-sm bg-surface text-text-primary placeholder-text-muted focus:outline-none focus:ring-accent focus:border-accent"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.email.message}</p>
               )}
             </div>
 
             <div>
               <label
                 htmlFor="full_name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 Full Name (optional)
               </label>
@@ -113,10 +113,10 @@ export default function RegisterPage() {
                 id="full_name"
                 type="text"
                 autoComplete="name"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-border-input rounded-md shadow-sm bg-surface text-text-primary placeholder-text-muted focus:outline-none focus:ring-accent focus:border-accent"
               />
               {errors.full_name && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-sm text-error">
                   {errors.full_name.message}
                 </p>
               )}
@@ -125,7 +125,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 Password
               </label>
@@ -134,10 +134,10 @@ export default function RegisterPage() {
                 id="password"
                 type="password"
                 autoComplete="new-password"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-border-input rounded-md shadow-sm bg-surface text-text-primary placeholder-text-muted focus:outline-none focus:ring-accent focus:border-accent"
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-sm text-error">
                   {errors.password.message}
                 </p>
               )}
@@ -146,7 +146,7 @@ export default function RegisterPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 Confirm Password
               </label>
@@ -155,10 +155,10 @@ export default function RegisterPage() {
                 id="confirmPassword"
                 type="password"
                 autoComplete="new-password"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-border-input rounded-md shadow-sm bg-surface text-text-primary placeholder-text-muted focus:outline-none focus:ring-accent focus:border-accent"
               />
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-sm text-error">
                   {errors.confirmPassword.message}
                 </p>
               )}
@@ -168,7 +168,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-accent-fg bg-accent hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Creating account...' : 'Create account'}
           </button>
