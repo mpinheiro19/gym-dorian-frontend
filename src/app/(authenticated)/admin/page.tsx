@@ -58,7 +58,7 @@ export default function AdminPage() {
           <p className="text-3xl font-bold text-text-primary">
             {dashboard?.user_stats?.total_users || 0}
           </p>
-          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+          <p className="text-xs text-success-text mt-1">
             {dashboard?.user_stats?.active_users || 0} active
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function AdminPage() {
           <p className="text-3xl font-bold text-text-primary">
             {dashboard?.goal_stats?.total_goals || 0}
           </p>
-          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+          <p className="text-xs text-success-text mt-1">
             {dashboard?.goal_stats?.completed_goals || 0} completed
           </p>
         </div>
@@ -130,8 +130,8 @@ export default function AdminPage() {
                       <span
                         className={`px-2 py-1 text-xs rounded-full ${
                           u.is_active
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                            ? 'bg-success-surface text-success-text'
+                            : 'bg-error-surface text-error-text'
                         }`}
                       >
                         {u.is_active ? 'Active' : 'Inactive'}
@@ -141,8 +141,8 @@ export default function AdminPage() {
                       <span
                         className={`px-2 py-1 text-xs rounded-full ${
                           u.is_superuser
-                            ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
-                            : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
+                            ? 'bg-info-surface text-info-text'
+                            : 'bg-surface-secondary text-text-secondary'
                         }`}
                       >
                         {u.is_superuser ? 'Admin' : 'User'}
