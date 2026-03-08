@@ -119,7 +119,7 @@ export default function EditPlanPage({ params }: PageProps) {
   if (isLoading || !initialized) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto" />
       </div>
     );
   }
@@ -127,8 +127,8 @@ export default function EditPlanPage({ params }: PageProps) {
   if (!plan) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Plan not found</p>
-        <Link href="/plans" className="text-blue-600 hover:underline mt-4 inline-block">
+        <p className="text-text-tertiary">Plan not found</p>
+        <Link href="/plans" className="text-accent hover:underline mt-4 inline-block">
           ← Back to Plans
         </Link>
       </div>
@@ -138,35 +138,35 @@ export default function EditPlanPage({ params }: PageProps) {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center gap-4 mb-8">
-        <Link href={`/plans/${planId}`} className="text-gray-500 hover:text-gray-700">
+        <Link href={`/plans/${planId}`} className="text-text-muted hover:text-text-secondary">
           ← Back
         </Link>
-        <h1 className="text-3xl font-bold text-gray-900">Edit Plan</h1>
+        <h1 className="text-3xl font-bold text-text-primary">Edit Plan</h1>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6 space-y-6">
+      <div className="bg-surface rounded-lg shadow p-6 space-y-6">
         {/* Name & Description */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Plan Name <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-text-secondary mb-1">
+              Plan Name <span className="text-error">*</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-text-secondary mb-1">
               Description
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary"
             />
           </div>
         </div>
@@ -174,17 +174,17 @@ export default function EditPlanPage({ params }: PageProps) {
         {/* Weeks */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-base font-semibold text-gray-800">Schedule</h2>
+            <h2 className="text-base font-semibold text-text-secondary">Schedule</h2>
             <button
               onClick={addWeek}
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-accent hover:underline"
             >
               + Add Week
             </button>
           </div>
 
           {schedule.length === 0 && (
-            <p className="text-sm text-gray-500 mb-3">
+            <p className="text-sm text-text-muted mb-3">
               No weeks yet. Add weeks to define your training cycle.
             </p>
           )}
@@ -193,10 +193,10 @@ export default function EditPlanPage({ params }: PageProps) {
             {schedule.map((week, wi) => (
               <div
                 key={wi}
-                className="border border-gray-200 rounded-lg p-4 relative"
+                className="border border-border rounded-lg p-4 relative"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="font-medium text-gray-800">
+                  <span className="font-medium text-text-secondary">
                     Week {week.week_number}
                   </span>
                   <input
@@ -210,12 +210,12 @@ export default function EditPlanPage({ params }: PageProps) {
                       })
                     }
                     placeholder="Week label (optional)"
-                    className="flex-1 border border-gray-300 rounded px-2 py-1 text-sm"
+                    className="flex-1 border border-border-input rounded px-2 py-1 text-sm bg-surface text-text-primary placeholder-text-muted"
                   />
                   {schedule.length > 1 && (
                     <button
                       onClick={() => removeWeek(wi)}
-                      className="text-red-500 hover:text-red-700 text-sm"
+                      className="text-error hover:text-error-text text-sm"
                     >
                       ✕
                     </button>
@@ -224,7 +224,7 @@ export default function EditPlanPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {DAY_NAMES.map((dayName, dow) => (
                     <div key={dow} className="flex items-center gap-2">
-                      <span className="text-sm text-gray-600 w-8">
+                      <span className="text-sm text-text-tertiary w-8">
                         {DAY_SHORT[dow]}
                       </span>
                       <select
@@ -232,7 +232,7 @@ export default function EditPlanPage({ params }: PageProps) {
                         onChange={(e) =>
                           handleDayTemplate(wi, dow, Number(e.target.value))
                         }
-                        className="flex-1 border border-gray-300 rounded px-2 py-1 text-sm"
+                        className="flex-1 border border-border-input rounded px-2 py-1 text-sm bg-surface text-text-primary"
                       >
                         <option value={0}>— Rest Day —</option>
                         {templates.map((t) => (
@@ -252,7 +252,7 @@ export default function EditPlanPage({ params }: PageProps) {
         <button
           onClick={handleSubmit}
           disabled={updateMutation.isPending}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50"
+          className="w-full bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium disabled:opacity-50"
         >
           {updateMutation.isPending ? 'Saving...' : '✓ Save Changes'}
         </button>

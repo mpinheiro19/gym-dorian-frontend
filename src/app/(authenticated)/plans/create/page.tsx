@@ -148,11 +148,11 @@ export default function CreatePlanPage() {
               ? router.push('/plans')
               : setStep((s) => (s - 1) as Step)
           }
-          className="text-gray-500 hover:text-gray-700"
+          className="text-text-muted hover:text-text-secondary"
         >
           ← Back
         </button>
-        <h1 className="text-3xl font-bold text-gray-900">Create Workout Plan</h1>
+        <h1 className="text-3xl font-bold text-text-primary">Create Workout Plan</h1>
       </div>
 
       {/* Step indicator */}
@@ -162,44 +162,44 @@ export default function CreatePlanPage() {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                 step >= s
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-500'
+                  ? 'bg-accent text-accent-fg'
+                  : 'bg-surface-secondary text-text-muted'
               }`}
             >
               {s}
             </div>
             {s < 3 && (
               <div
-                className={`h-0.5 w-12 ${step > s ? 'bg-blue-600' : 'bg-gray-200'}`}
+                className={`h-0.5 w-12 ${step > s ? 'bg-accent' : 'bg-surface-secondary'}`}
               />
             )}
           </div>
         ))}
-        <div className="ml-2 text-sm text-gray-500">
+        <div className="ml-2 text-sm text-text-muted">
           {step === 1 && 'Plan Details'}
           {step === 2 && 'Define Weeks'}
           {step === 3 && 'Schedule'}
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-surface rounded-lg shadow p-6">
         {/* ---- STEP 1: Name & Description ---- */}
         {step === 1 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Plan Name <span className="text-red-500">*</span>
+              <label className="block text-sm font-medium text-text-secondary mb-1">
+                Plan Name <span className="text-error">*</span>
               </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g., PPL 6-day — Volume Block"
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary placeholder-text-muted"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Description
               </label>
               <textarea
@@ -207,12 +207,12 @@ export default function CreatePlanPage() {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe what this plan is for..."
                 rows={3}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary placeholder-text-muted"
               />
             </div>
             <button
               onClick={goToStep2}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium"
+              className="w-full bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium"
             >
               Next: Define Weeks →
             </button>
@@ -223,7 +223,7 @@ export default function CreatePlanPage() {
         {step === 2 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Number of Weeks in Cycle
               </label>
               <input
@@ -232,20 +232,20 @@ export default function CreatePlanPage() {
                 max={12}
                 value={weekCount}
                 onChange={(e) => handleWeekCountChange(Number(e.target.value))}
-                className="w-24 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-24 border border-border-input rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-text-muted mt-1">
                 The cycle repeats from your start date. Max 12 weeks.
               </p>
             </div>
 
             <div className="space-y-3">
-              <p className="text-sm font-medium text-gray-700">
+              <p className="text-sm font-medium text-text-secondary">
                 Week Labels (optional)
               </p>
               {Array.from({ length: weekCount }, (_, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <span className="text-sm text-gray-500 w-20">Week {i + 1}</span>
+                  <span className="text-sm text-text-muted w-20">Week {i + 1}</span>
                   <input
                     type="text"
                     value={weekNames[i] ?? ''}
@@ -255,7 +255,7 @@ export default function CreatePlanPage() {
                       setWeekNames(next);
                     }}
                     placeholder="e.g., Heavy Week"
-                    className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 border border-border-input rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary placeholder-text-muted"
                   />
                 </div>
               ))}
@@ -264,13 +264,13 @@ export default function CreatePlanPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setStep(1)}
-                className="flex-1 border border-gray-300 rounded-md px-4 py-2 font-medium hover:bg-gray-50"
+                className="flex-1 border border-border-input rounded-md px-4 py-2 font-medium hover:bg-surface-hover text-text-secondary"
               >
                 ← Back
               </button>
               <button
                 onClick={goToStep3}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium"
+                className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-4 py-2 rounded-md font-medium"
               >
                 Next: Schedule →
               </button>
@@ -281,20 +281,20 @@ export default function CreatePlanPage() {
         {/* ---- STEP 3: Schedule grid ---- */}
         {step === 3 && (
           <div className="space-y-6">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-text-tertiary">
               Assign a template to each training day. Leave blank for rest days.
             </p>
 
             {schedule.map((week, wi) => (
-              <div key={wi} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-3">
+              <div key={wi} className="border border-border rounded-lg p-4">
+                <h3 className="font-semibold text-text-secondary mb-3">
                   Week {week.week_number}
                   {week.name ? ` — ${week.name}` : ''}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {DAY_NAMES.map((dayName, dow) => (
                     <div key={dow} className="flex items-center gap-2">
-                      <span className="text-sm text-gray-600 w-8">
+                      <span className="text-sm text-text-tertiary w-8">
                         {DAY_SHORT[dow]}
                       </span>
                       <select
@@ -302,7 +302,7 @@ export default function CreatePlanPage() {
                         onChange={(e) =>
                           handleDayTemplate(wi, dow, Number(e.target.value))
                         }
-                        className="flex-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 border border-border-input rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-accent bg-surface text-text-primary"
                       >
                         <option value={0}>— Rest Day —</option>
                         {templates.map((t) => (
@@ -318,7 +318,7 @@ export default function CreatePlanPage() {
             ))}
 
             {templates.length === 0 && (
-              <div className="text-sm text-yellow-700 bg-yellow-50 rounded-md p-3">
+              <div className="text-sm text-warning-text bg-warning-surface rounded-md p-3">
                 ⚠️ No templates found. Create templates first to assign to days.
               </div>
             )}
@@ -326,14 +326,14 @@ export default function CreatePlanPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setStep(2)}
-                className="flex-1 border border-gray-300 rounded-md px-4 py-2 font-medium hover:bg-gray-50"
+                className="flex-1 border border-border-input rounded-md px-4 py-2 font-medium hover:bg-surface-hover text-text-secondary"
               >
                 ← Back
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={createMutation.isPending || templates.length === 0}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50"
+                className="flex-1 bg-success hover:bg-success/90 text-accent-fg px-4 py-2 rounded-md font-medium disabled:opacity-50"
               >
                 {createMutation.isPending ? 'Creating...' : '✓ Create Plan'}
               </button>
