@@ -35,6 +35,10 @@
   --color-warning: #d97706;
   --color-warning-surface: #fefce8;
   --color-warning-text: #92400e;
+
+  --color-info: #7c3aed;
+  --color-info-surface: #f5f3ff;
+  --color-info-text: #5b21b6;
 }
 
 /* ── Dark theme tokens ── */
@@ -69,6 +73,10 @@
   --color-warning: #fbbf24;
   --color-warning-surface: #451a03;
   --color-warning-text: #fde68a;
+
+  --color-info: #a78bfa;
+  --color-info-surface: #2e1065;
+  --color-info-text: #c4b5fd;
 }
 
 /* ── Register tokens with Tailwind v4 ── */
@@ -106,6 +114,10 @@
   --color-warning: var(--color-warning);
   --color-warning-surface: var(--color-warning-surface);
   --color-warning-text: var(--color-warning-text);
+
+  --color-info: var(--color-info);
+  --color-info-surface: var(--color-info-surface);
+  --color-info-text: var(--color-info-text);
 }
 
 body {
