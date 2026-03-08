@@ -97,10 +97,20 @@ export default function WorkoutsPage() {
                     <p className="text-sm text-gray-600 mt-2">{session.notes}</p>
                   )}
                 </div>
-                <div className="text-right">
+                <div className="text-right flex flex-col items-end gap-1">
                   <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
                     {session.exercises_done?.length || 0} exercises
                   </span>
+                  {session.template_id && (
+                    <span className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
+                      📋 From Template
+                    </span>
+                  )}
+                  {session.plan_id && (
+                    <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                      📅 From Plan
+                    </span>
+                  )}
                 </div>
               </div>
             </Link>
