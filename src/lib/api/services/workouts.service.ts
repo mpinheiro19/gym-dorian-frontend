@@ -1,8 +1,8 @@
 import apiClient from '../client';
 import type { components } from '@/types/api';
 
-type Exercise = components['schemas']['Exercise'];
-type WorkoutSession = components['schemas']['WorkoutSession'];
+type Exercise = components['schemas']['ExerciseResponse'];
+type WorkoutSession = components['schemas']['WorkoutSessionResponse'];
 type WorkoutSessionCreate = components['schemas']['WorkoutSessionCreate'];
 type QuickWorkoutLog = components['schemas']['QuickWorkoutLog'];
 

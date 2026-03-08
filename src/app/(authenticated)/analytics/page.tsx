@@ -149,7 +149,7 @@ export default function AnalyticsPage() {
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  label={(entry) => `${entry.muscle_group}: ${entry.percentage.toFixed(1)}%`}
+                  label={(entry: any) => `${entry.muscle_group}: ${entry.percentage.toFixed(1)}%`}
                   labelLine={{ stroke: 'var(--color-border)', strokeWidth: 1 }}
                   style={{ fontSize: '14px', fontWeight: '600', fill: 'var(--color-text-primary)' }}
                 >

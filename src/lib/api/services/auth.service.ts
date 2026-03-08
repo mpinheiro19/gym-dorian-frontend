@@ -3,7 +3,7 @@ import type { components } from '@/types/api';
 import Cookies from 'js-cookie';
 
 type UserCreate = components['schemas']['UserCreate'];
-type User = components['schemas']['User'];
+type User = components['schemas']['UserResponse'];
 type Token = components['schemas']['Token'];
 
 export interface LoginCredentials {
