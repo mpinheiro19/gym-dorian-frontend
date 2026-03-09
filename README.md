@@ -2,6 +2,8 @@
 
 Next.js application for workout tracking and planning, built with React 19, TypeScript, and Tailwind CSS.
 
+This project is designed as a hands-on exploration of modern AI-assisted development, serving as a sandbox to **evaluate** and **master** tools such as **GitHub Copilot**, **Claude Code**, and other emerging LLM-based workflows. The codebase and architecture are **intentionally** shaped to <ins>test the limits of AI pair-programming, automated refactoring, and agentic coding patterns</ins>.
+
 ## Getting Started
 
 ### Prerequisites
