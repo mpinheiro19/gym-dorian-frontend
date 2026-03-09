@@ -102,12 +102,12 @@ export default function WorkoutsPage() {
                     {session.exercises_done?.length || 0} exercises
                   </span>
                   {session.template_id && (
-                    <span className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
+                    <span className="inline-block bg-info-surface text-info-text text-xs px-2 py-1 rounded-full">
                       📋 From Template
                     </span>
                   )}
                   {session.plan_id && (
-                    <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                    <span className="inline-block bg-success-surface text-success-text text-xs px-2 py-1 rounded-full">
                       📅 From Plan
                     </span>
                   )}

@@ -219,25 +219,25 @@ export default function AnalyticsPage() {
         {exerciseProgress ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+              <div className="bg-accent-surface p-4 rounded-lg">
                 <p className="text-sm text-text-secondary">Starting Weight</p>
                 <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.starting_weight} kg
                 </p>
               </div>
-              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+              <div className="bg-success-surface p-4 rounded-lg">
                 <p className="text-sm text-text-secondary">Current Weight</p>
                 <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.current_weight} kg
                 </p>
               </div>
-              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+              <div className="bg-info-surface p-4 rounded-lg">
                 <p className="text-sm text-text-secondary">Weight Gain</p>
-                <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+                <p className="text-2xl font-bold text-success-text">
                   +{exerciseProgress.weight_gain} kg
                 </p>
               </div>
-              <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+              <div className="bg-warning-surface p-4 rounded-lg">
                 <p className="text-sm text-text-secondary">Total Workouts</p>
                 <p className="text-2xl font-bold text-text-primary">
                   {exerciseProgress.total_workouts}

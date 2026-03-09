@@ -57,19 +57,19 @@ export default function DashboardPage() {
       </div>
 
       {/* Today's Workout Widget */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">📅 Today&apos;s Workout</h2>
+      <div className="bg-surface rounded-lg shadow p-6 mb-6">
+        <h2 className="text-lg font-semibold text-text-primary mb-4">📅 Today&apos;s Workout</h2>
         {isTodayLoading ? (
           <div className="flex items-center gap-3">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-            <span className="text-gray-600">Checking your plan...</span>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-accent"></div>
+            <span className="text-text-tertiary">Checking your plan...</span>
           </div>
         ) : !todayWorkout ? (
           <div className="text-center py-4">
-            <p className="text-gray-600 mb-3">No active workout plan. Start by creating one!</p>
+            <p className="text-text-tertiary mb-3">No active workout plan. Start by creating one!</p>
             <Link
               href="/plans/create"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md font-medium text-sm"
+              className="inline-block bg-accent hover:bg-accent-hover text-accent-fg px-5 py-2 rounded-md font-medium text-sm"
             >
               Create Your First Plan
             </Link>
@@ -78,23 +78,23 @@ export default function DashboardPage() {
           <div className="flex items-center gap-3">
             <span className="text-3xl">😴</span>
             <div>
-              <p className="font-semibold text-gray-900">Rest Day</p>
-              <p className="text-sm text-gray-600">{todayWorkout.plan_name} — Week {todayWorkout.week_number}</p>
+              <p className="font-semibold text-text-primary">Rest Day</p>
+              <p className="text-sm text-text-tertiary">{todayWorkout.plan_name} — Week {todayWorkout.week_number}</p>
             </div>
           </div>
         ) : (
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-gray-900 text-lg">{todayWorkout.template_name}</p>
-              <p className="text-sm text-gray-600">{todayWorkout.plan_name} — Week {todayWorkout.week_number}, {todayWorkout.day_name}</p>
+              <p className="font-semibold text-text-primary text-lg">{todayWorkout.template_name}</p>
+              <p className="text-sm text-text-tertiary">{todayWorkout.plan_name} — Week {todayWorkout.week_number}, {todayWorkout.day_name}</p>
               {todayWorkout.template_description && (
-                <p className="text-sm text-gray-500 mt-1">{todayWorkout.template_description}</p>
+                <p className="text-sm text-text-muted mt-1">{todayWorkout.template_description}</p>
               )}
             </div>
             <button
               onClick={() => startWorkoutMutation.mutate(todayWorkout.plan_id)}
               disabled={startWorkoutMutation.isPending}
-              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md font-medium text-sm disabled:opacity-50"
+              className="bg-success hover:bg-success/90 text-accent-fg px-5 py-2 rounded-md font-medium text-sm disabled:opacity-50"
             >
               {startWorkoutMutation.isPending ? 'Starting...' : 'Start Workout'}
             </button>

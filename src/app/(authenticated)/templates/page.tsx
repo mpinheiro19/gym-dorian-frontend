@@ -124,7 +124,7 @@ export default function TemplatesPage() {
                 <div className="flex gap-2">
                   <Link
                     href={`/templates/${template.id}/edit`}
-                    className="flex-1 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md text-sm font-medium border border-blue-300 text-center"
+                    className="flex-1 px-4 py-2 text-accent hover:bg-accent-surface rounded-md text-sm font-medium border border-border-input text-center"
                   >
                     Edit
                   </Link>

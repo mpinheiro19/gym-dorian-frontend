@@ -175,7 +175,7 @@ export default function ProfilePage() {
               <p className="text-sm font-medium text-text-secondary">Account Type</p>
               <p className="text-lg text-text-primary">
                 {user?.is_superuser ? (
-                  <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded">
+                  <span className="bg-info-surface text-info-text px-2 py-1 rounded">
                     Administrator
                   </span>
                 ) : (

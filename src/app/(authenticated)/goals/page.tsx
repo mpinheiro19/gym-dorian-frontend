@@ -273,15 +273,15 @@ export default function GoalsPage() {
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${
                         goal.status === 'active'
-                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                          ? 'bg-success-surface text-success-text'
                           : goal.status === 'completed'
-                          ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
+                          ? 'bg-accent-surface text-accent-surface-text'
+                          : 'bg-surface-secondary text-text-secondary'
                       }`}
                     >
                       {goal.status}
                     </span>
-                    <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-info-surface text-info-text px-2 py-1 rounded-full">
                       {goal.goal_type.replace('_', ' ')}
                     </span>
                   </div>

@@ -109,8 +109,8 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
   if (isLoadingTemplate) {
     return (
       <div className="text-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-800">Loading template...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto"></div>
+        <p className="mt-4 text-text-secondary">Loading template...</p>
       </div>
     );
   }
@@ -118,8 +118,8 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
   if (!template) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600 mb-4">Template not found</p>
-        <Link href="/templates" className="text-blue-600 hover:underline">Back to Templates</Link>
+        <p className="text-error mb-4">Template not found</p>
+        <Link href="/templates" className="text-accent hover:underline">Back to Templates</Link>
       </div>
     );
   }
@@ -127,37 +127,37 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/templates" className="text-gray-500 hover:text-gray-700">← Back</Link>
-        <h1 className="text-3xl font-bold text-gray-900">Edit Template</h1>
+        <Link href="/templates" className="text-text-muted hover:text-text-secondary">← Back</Link>
+        <h1 className="text-3xl font-bold text-text-primary">Edit Template</h1>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Template Details */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Template Details</h2>
+        <div className="bg-surface rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-text-primary mb-4">Template Details</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Template Name *
               </label>
               <input
                 type="text"
                 {...register('name')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface placeholder-text-muted"
                 placeholder="e.g., Push Day A"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                <p className="mt-1 text-sm text-error">{errors.name.message}</p>
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 Description
               </label>
               <textarea
                 {...register('description')}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface placeholder-text-muted"
                 placeholder="Describe this workout template..."
               />
             </div>
@@ -167,7 +167,7 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
         {/* Exercises */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-900">Exercises</h2>
+            <h2 className="text-xl font-semibold text-text-primary">Exercises</h2>
             <button
               type="button"
               onClick={() =>
@@ -178,18 +178,18 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                   notes: '',
                 })
               }
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              className="bg-success hover:bg-success/90 text-accent-fg px-4 py-2 rounded-md text-sm font-medium"
             >
               + Add Exercise
             </button>
           </div>
 
           {errors.exercises && (
-            <p className="text-sm text-red-600">{errors.exercises.message}</p>
+            <p className="text-sm text-error">{errors.exercises.message}</p>
           )}
 
           {fields.map((field, index) => (
-            <div key={field.id} className="bg-white rounded-lg shadow p-6">
+            <div key={field.id} className="bg-surface rounded-lg shadow p-6">
               <div className="flex items-start gap-4">
                 {/* Order Controls */}
                 <div className="flex flex-col gap-1 items-center">
@@ -197,16 +197,16 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                     type="button"
                     onClick={() => index > 0 && move(index, index - 1)}
                     disabled={index === 0}
-                    className="text-gray-500 hover:text-gray-700 disabled:opacity-30"
+                    className="text-text-muted hover:text-text-secondary disabled:opacity-30"
                   >
                     ▲
                   </button>
-                  <span className="text-center font-medium text-gray-600">{index + 1}</span>
+                  <span className="text-center font-medium text-text-secondary">{index + 1}</span>
                   <button
                     type="button"
                     onClick={() => index < fields.length - 1 && move(index, index + 1)}
                     disabled={index === fields.length - 1}
-                    className="text-gray-500 hover:text-gray-700 disabled:opacity-30"
+                    className="text-text-muted hover:text-text-secondary disabled:opacity-30"
                   >
                     ▼
                   </button>
@@ -215,12 +215,12 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                 {/* Exercise Form */}
                 <div className="flex-1 space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-text-secondary mb-1">
                       Exercise *
                     </label>
                     <select
                       {...register(`exercises.${index}.exercise_id`, { valueAsNumber: true })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                      className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
                       disabled={isLoadingExercises}
                     >
                       <option value={0}>
@@ -234,7 +234,7 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                       ))}
                     </select>
                     {errors.exercises?.[index]?.exercise_id && (
-                      <p className="mt-1 text-sm text-red-600">
+                      <p className="mt-1 text-sm text-error">
                         {errors.exercises[index]?.exercise_id?.message}
                       </p>
                     )}
@@ -242,13 +242,13 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-sm font-medium text-text-secondary mb-1">
                         Target Sets
                       </label>
                       <input
                         type="number"
                         {...register(`exercises.${index}.target_sets`, { valueAsNumber: true })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                        className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface"
                         min="1"
                         max="20"
                       />
@@ -256,11 +256,11 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                    <label className="block text-sm font-medium text-text-secondary mb-1">Notes</label>
                     <input
                       type="text"
                       {...register(`exercises.${index}.notes`)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
+                      className="w-full px-3 py-2 border border-border-input rounded-md text-text-primary bg-surface placeholder-text-muted"
                       placeholder="e.g., Focus on form..."
                     />
                   </div>
@@ -271,7 +271,7 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
                   <button
                     type="button"
                     onClick={() => remove(index)}
-                    className="text-red-600 hover:text-red-700 font-medium"
+                    className="text-error hover:text-error-text font-medium"
                   >
                     Remove
                   </button>
@@ -286,14 +286,14 @@ export default function EditTemplatePage({ params }: { params: Promise<{ id: str
           <button
             type="submit"
             disabled={updateMutation.isPending}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium disabled:opacity-50"
+            className="flex-1 bg-accent hover:bg-accent-hover text-accent-fg px-6 py-3 rounded-md font-medium disabled:opacity-50"
           >
             {updateMutation.isPending ? 'Saving...' : 'Update Template'}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+            className="px-6 py-3 border border-border-input rounded-md font-medium hover:bg-surface-hover text-text-secondary"
           >
             Cancel
           </button>
