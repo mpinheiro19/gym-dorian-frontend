@@ -83,4 +83,30 @@ export const authService = {
       window.location.href = '/login';
     }
   },
+
+  /**
+   * Initiate a password reset — sends a reset link to the given email.
+   * The backend always returns a generic message to prevent email enumeration.
+   */
+  async forgotPassword(email: string): Promise<{ detail: string }> {
+    const response = await apiClient.post<{ detail: string }>(
+      '/auth/forgot-password',
+      { email }
+    );
+    return response.data;
+  },
+
+  /**
+   * Complete a password reset using the token from the reset email.
+   */
+  async resetPassword(
+    token: string,
+    newPassword: string
+  ): Promise<{ detail: string }> {
+    const response = await apiClient.post<{ detail: string }>(
+      '/auth/reset-password',
+      { token, new_password: newPassword }
+    );
+    return response.data;
+  },
 };
