@@ -41,7 +41,18 @@
     "welcomeBack": "Bem-vindo de volta!",
     "accountCreated": "Conta criada! Por favor, entre.",
     "invalidCredentials": "E-mail ou senha inválidos",
-    "passwordsDontMatch": "As senhas não coincidem"
+    "passwordsDontMatch": "As senhas não coincidem",
+    "forgotPassword": "Esqueceu sua senha?",
+    "forgotPasswordDescription": "Digite seu email e enviaremos um link de redefinição.",
+    "sendResetLink": "Enviar link de redefinição",
+    "resetPassword": "Redefinir senha",
+    "newPassword": "Nova senha",
+    "confirmNewPassword": "Confirmar nova senha",
+    "passwordResetSent": "Se seu email existir em nosso sistema, um link de redefinição foi enviado.",
+    "passwordResetSuccess": "Senha redefinida com sucesso. Você já pode fazer login.",
+    "invalidResetToken": "Link de redefinição inválido ou expirado. Solicite um novo.",
+    "emailDeliveryError": "Falha no envio de email. Entre em contato com o suporte.",
+    "passwordPolicy": "A senha deve ter no mínimo 8 caracteres com 1 maiúscula e 1 caractere especial."
   },
   "dashboard": {
     "title": "Painel",

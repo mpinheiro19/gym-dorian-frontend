@@ -41,7 +41,18 @@
     "welcomeBack": "Welcome back!",
     "accountCreated": "Account created! Please sign in.",
     "invalidCredentials": "Invalid email or password",
-    "passwordsDontMatch": "Passwords don't match"
+    "passwordsDontMatch": "Passwords don't match",
+    "forgotPassword": "Forgot your password?",
+    "forgotPasswordDescription": "Enter your email and we'll send you a reset link.",
+    "sendResetLink": "Send reset link",
+    "resetPassword": "Reset password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "passwordResetSent": "If your email exists in our system, a reset link has been sent.",
+    "passwordResetSuccess": "Password reset successful. You can now log in.",
+    "invalidResetToken": "Invalid or expired reset link. Please request a new one.",
+    "emailDeliveryError": "Email delivery failed. Please contact support.",
+    "passwordPolicy": "Password must be at least 8 characters with 1 uppercase and 1 special character."
   },
   "dashboard": {
     "title": "Dashboard",
